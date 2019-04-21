@@ -645,7 +645,7 @@ int getCost(int cardNumber)
 
 int adventurerCard(struct gameState *state, int currentPlayer, int* temphand){
   int z = 0;
-  int drawntreasure = 0;
+  int drawntreasure = 1;
   int cardDrawn;
 
   while(drawntreasure<2){
@@ -679,7 +679,7 @@ int smithyCard(struct gameState *state, int currentPlayer, int handPos){
     }
 
   //discard card from hand
-  discardCard(handPos, currentPlayer, state, 0);
+  discardCard(handPos, currentPlayer, state, 1);
   return 0;
 }
 
@@ -689,7 +689,7 @@ int villageCard(struct gameState *state, int currentPlayer, int handPos){
   drawCard(currentPlayer, state);
 
   //+2 Actions
-  state->numActions = state->numActions + 2;
+  state->numActions = state->numActions - 1;
 
   //discard played card from hand
   discardCard(handPos, currentPlayer, state, 0);
@@ -724,7 +724,7 @@ int stewardCard(struct gameState *state, int currentPlayer, int handPos, int cho
   else
     {
     //trash 2 cards in hand
-    discardCard(choice2, currentPlayer, state, 1);
+    discardCard(choice1, currentPlayer, state, 1);
     discardCard(choice3, currentPlayer, state, 1);
     }
 
