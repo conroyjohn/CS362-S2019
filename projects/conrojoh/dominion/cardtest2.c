@@ -1,0 +1,47 @@
+#include "dominion.h"
+#include "dominion_helpers.h"
+#include <string.h>
+#include <stdio.h>
+#include <assert.h>
+#include "rngs.h"
+#include <stdlib.h>
+
+#define TESTCARD "outpost"
+
+int main() {
+    int newCards = 0;
+    int discarded = 1;
+    int coin_bonus = 0;
+
+    int handpos = 0;
+    int seed = 1000;
+    int numPlayers = 2;
+    int thisPlayer = 0;
+	  struct gameState G, testG;
+	  int k[10] = {adventurer, embargo, village, minion, mine, cutpurse,
+			sea_hag, tribute, smithy, council_room};
+
+    int cardReturned;
+
+	// initialize a game state and player cards
+	initializeGame(numPlayers, k, seed, &G);
+
+	printf("----------------- Testing Card: %s ----------------\n", TESTCARD);
+
+	// ----------- TEST 1: two cards are added and deck contains 5 cards--------------
+	printf("TESTS: Hand Count, Outpost Played\n");
+
+	// copy the game state to a test case
+	memcpy(&testG, &G, sizeof(struct gameState));
+	cardReturned = cardEffect(outpost, 0, 0, 0, &testG, handpos, &coin_bonus);
+
+	printf("hand count = %d, expected = %d\n", testG.handCount[thisPlayer], G.handCount[thisPlayer] + newCards - discarded);
+  printf("Outpost played = %d, expected =%d\n", testG.outpostPlayed, G.outpostPlayed + 1);
+  assert(testG.handCount[thisPlayer] == G.handCount[thisPlayer] + newCards - discarded);
+  assert(testG.outpostPlayed == (G.outpostPlayed + 1));
+
+	printf("\n >>>>> SUCCESS: Testing complete %s <<<<<\n\n", TESTCARD);
+
+
+	return 0;
+}
