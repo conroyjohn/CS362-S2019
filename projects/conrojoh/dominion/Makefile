@@ -39,6 +39,7 @@ cardtest3: cardtest3.c dominion.o rngs.o
 cardtest4: cardtest4.c dominion.o rngs.o
 		gcc -o cardtest4 -g  cardtest4.c dominion.o rngs.o $(CFLAGS)
 
+
 unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c dominion.c rngs.c
 	echo "Result for running dominion tests:" > unittestresults.out
 	echo "unittest1.c:" >> unittestresults.out
@@ -98,6 +99,57 @@ unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c dominion.c rngs
 	gcov -f -b dominion.c >> unittestresults.out
 	make cleanO
 
+randomtestcard1: randomtestcard1.c dominion.o rngs.o
+	gcc -o randomtestcard1 -g  randomtestcard1.c dominion.o rngs.o $(CFLAGS)
+
+randcoverage1:
+	make dominion.o
+	gcc -o randomtestcard1 dominion.o rngs.o randomtestcard1.c $(CFLAGS)
+	./randomtestcard1
+	gcov -f -b dominion.c >> randomtestcard1.out
+	make cleanO
+
+randomtestcard2: randomtestcard2.c dominion.o rngs.o
+	gcc -o randomtestcard2 -g  randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+
+randcoverage2:
+	make dominion.o
+	gcc -o randomtestcard2 dominion.o rngs.o randomtestcard2.c $(CFLAGS)
+	./randomtestcard2
+	gcov -f -b dominion.c >> randomtestcard2.out
+	make cleanO
+
+randomtestadventurer: randomtestadventurer.c dominion.o rngs.o
+		gcc -o randomtestadventurer -g  randomtestadventurer.c dominion.o rngs.o $(CFLAGS)
+
+randcoverageadventurer:
+	make dominion.o
+	gcc -o randomtestadventurer dominion.o rngs.o randomtestadventurer.c $(CFLAGS)
+	./randomtestadventurer
+	gcov -f -b dominion.c >> randomtestadventurer.out
+	make cleanO
+
+randomtestresults:
+	echo "randomtestcard1:" >> randomtestresults.out
+	make dominion.o
+	gcc -o randomtestcard1 dominion.o rngs.o randomtestcard1.c $(CFLAGS)
+	./randomtestcard1 >> randomtestresults.out
+	gcov -f -b dominion.c >> randomtestresults.out
+	make cleanO
+	echo "randomtestcard2:" >> randomtestresults.out
+	make dominion.o
+	gcc -o randomtestcard2 dominion.o rngs.o randomtestcard2.c $(CFLAGS)
+	./randomtestcard2 >> randomtestresults.out
+	gcov -f -b dominion.c >> randomtestresults.out
+	make cleanO
+	echo "randomtestcardadventurer:" >> randomtestresults.out
+	make dominion.o
+	gcc -o randomtestadventurer dominion.o rngs.o randomtestadventurer.c $(CFLAGS)
+	./randomtestadventurer >> randomtestresults.out
+	gcov -f -b dominion.c >> randomtestresults.out
+	make cleanO
+
+
 
 badTestDrawCard: badTestDrawCard.c dominion.o rngs.o
 	gcc -o badTestDrawCard -g  badTestDrawCard.c dominion.o rngs.o $(CFLAGS)
@@ -126,4 +178,4 @@ cleanO:
 	rm -f *.o
 
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe unittestresults.out unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe unittestresults.out unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4 randomtestcard1 randomtestcard2 randomtestadventurer
