@@ -6,7 +6,7 @@
 #include "rngs.h"
 #include <stdlib.h>
 
-#define TESTCARD "adventurer"
+#define TESTCARD "baron"
 
 int main() {
     int newActions = 0;

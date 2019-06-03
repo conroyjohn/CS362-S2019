@@ -53,7 +53,7 @@ int main() {
     }
   }
 
-	cardReturned = adventurerCard(&testG, thisPlayer, temphand);
+	cardReturned = caseAdventurer(thisPlayer, &testG, temphand, temphand);
 
 	if(testG.handCount[thisPlayer] == G.handCount[thisPlayer] + newCards - discarded){
     passed++;

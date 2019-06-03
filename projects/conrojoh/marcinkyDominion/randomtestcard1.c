@@ -37,7 +37,7 @@ int main() {
   testG.handCount[thisPlayer] = randHandSize;
   G.handCount[thisPlayer] = randHandSize;
 
-	cardReturned = smithyCard(&testG, thisPlayer, handpos);
+	cardReturned = caseSmithy(thisPlayer, &testG, handpos);
 
 	if(testG.handCount[thisPlayer] == G.handCount[thisPlayer] + newCards - discarded &&
     testG.deckCount[thisPlayer] == G.deckCount[thisPlayer] - newCards){

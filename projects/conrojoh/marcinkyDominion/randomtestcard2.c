@@ -42,7 +42,7 @@ int main() {
   testG.numActions = randNumActions;
   testG.numActions = randNumActions;
 
-	cardReturned = villageCard(&testG, thisPlayer, handpos);
+	cardReturned = caseVillage(thisPlayer, &testG, handpos);
   if(testG.handCount[thisPlayer] == G.handCount[thisPlayer] + newCards - discarded &&
 	testG.deckCount[thisPlayer] == G.deckCount[thisPlayer] - newCards &&
   testG.numActions == G.numActions + newActions){
